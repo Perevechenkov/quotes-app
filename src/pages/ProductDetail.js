@@ -5,7 +5,7 @@ export default function ProductDetail(props) {
 
   return (
     <section>
-      <h1>Detaild</h1>
+      <h1>Details</h1>
       <p>{params.productId}</p>
     </section>
   );
