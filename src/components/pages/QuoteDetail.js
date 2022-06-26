@@ -1,3 +1,12 @@
+import { useParams } from 'react-router-dom';
+
 export default function QuoteDetail(props) {
-  return <h1>QuoteDetail</h1>;
+  const params = useParams();
+
+  return (
+    <>
+      <h1>QuoteDetail</h1>
+      <p>{params.quoteId}</p>
+    </>
+  );
 }
