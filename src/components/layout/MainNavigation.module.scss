@@ -1,0 +1,44 @@
+@use '../../abstracts/variables' as *;
+
+.header {
+     padding: 0 10%;
+     height: 5rem;
+
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+
+     background-color: $bg-primary-dark-green;
+
+     .logo {
+          font-size: 2rem;
+     }
+
+     .nav {
+          ul {
+               margin: 0;
+               padding: 0;
+
+               display: flex;
+
+               list-style: none;
+
+               li {
+                    margin-left: 1.5rem;
+
+                    font-size: 1.25rem;
+
+                    a {
+                         text-decoration: none;
+                         color: $text-green-color;
+
+                         &:hover,
+                         &:active,
+                         &.active {
+                              color: #e6fcfc;
+                         }
+                    }
+               }
+          }
+     }
+}
