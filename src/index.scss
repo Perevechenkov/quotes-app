@@ -25,6 +25,25 @@ html {
       a {
         color: $text-blue-color;
       }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+
+        border: 1px solid $bg-primary-dark-green;
+        border-radius: 4px;
+
+        text-decoration: none;
+
+        background-color: $bg-primary-dark-green;
+        color: $text-color;
+        cursor: pointer;
+
+        &:hover,
+        &:active {
+          background-color: $bg-primary-dark-green-hover;
+          border-color: $bg-primary-dark-green-hover;
+        }
+      }
     }
   }
 }
