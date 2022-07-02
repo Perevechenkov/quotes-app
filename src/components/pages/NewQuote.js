@@ -1,3 +1,5 @@
+import QuoteForm from '../quotes/QuoteForm';
+
 export default function NewQuote(props) {
-  return <h1>NewQuote</h1>;
+  return <QuoteForm />;
 }
