@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import classes from './QuoteItem.module.scss';
 
 export default function QuoteItem({ quoteObj }) {
-  const { text, author } = quoteObj;
+  const { id, text, author } = quoteObj;
 
   return (
     <li className={classes.item}>
@@ -11,7 +12,9 @@ export default function QuoteItem({ quoteObj }) {
         </blockquote>
         <figcaption>{author}</figcaption>
       </figure>
-      <a className='btn'>View Fullscreen</a>
+      <Link to={`/quotes/${id}`} className='btn'>
+        View Fullscreen
+      </Link>
     </li>
   );
 }
