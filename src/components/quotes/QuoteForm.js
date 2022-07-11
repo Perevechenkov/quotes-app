@@ -1,8 +1,12 @@
-import classes from './QuoteForm.module.scss';
+import { useRef, useState } from 'react';
+import { Prompt } from 'react-router-dom';
+
 import Card from '../UI/Card';
-import { useRef } from 'react';
+import classes from './QuoteForm.module.scss';
 
 export default function QuoteForm(props) {
+  const [isEntering, setIsEntering] = useState(false);
+
   const authorRef = useRef();
   const textRef = useRef();
 
@@ -22,21 +26,41 @@ export default function QuoteForm(props) {
     });
   };
 
+  const formFocusedHandler = () => {
+    setIsEntering(true);
+  };
+
+  const finishEnteringHandler = () => {
+    setIsEntering(false);
+  };
+
   return (
-    <Card>
-      <form className={classes.form} onSubmit={submitHandler}>
-        <div className={classes.control}>
-          <label htmlFor='author'>Author</label>
-          <input type='text' id='author' ref={authorRef}></input>
-        </div>
-        <div className={classes.control}>
-          <label htmlFor='text'>Text</label>
-          <textarea id='text' rows='5' ref={textRef}></textarea>
-        </div>
-        <div className={classes.actions}>
-          <button className='btn'>Add Quote</button>
-        </div>
-      </form>
-    </Card>
+    <>
+      <Prompt
+        when={isEntering}
+        message={location => "Are you sure 'bout that?"}
+      />
+      <Card>
+        <form
+          className={classes.form}
+          onFocus={formFocusedHandler}
+          onSubmit={submitHandler}
+        >
+          <div className={classes.control}>
+            <label htmlFor='author'>Author</label>
+            <input type='text' id='author' ref={authorRef}></input>
+          </div>
+          <div className={classes.control}>
+            <label htmlFor='text'>Text</label>
+            <textarea id='text' rows='5' ref={textRef}></textarea>
+          </div>
+          <div className={classes.actions}>
+            <button onClick={finishEnteringHandler} className='btn'>
+              Add Quote
+            </button>
+          </div>
+        </form>
+      </Card>
+    </>
   );
 }
