@@ -26,7 +26,23 @@ html {
 
       .centered {
         text-align: center;
-        font-size: 2rem;
+
+        .btn--flat {
+          padding: 0.75rem 1.5rem;
+
+          border-radius: 4px;
+
+          text-decoration: none;
+
+          color: $text-blue-color;
+          cursor: pointer;
+
+          &:hover,
+          &:active {
+            color: $text-color;
+            background-color: $bg-primary-dark-green;
+          }
+        }
       }
 
       .btn {
