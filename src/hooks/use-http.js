@@ -30,9 +30,9 @@ const httpReducer = (state, action) => {
   }
 };
 
-export default function useHttp(requestFn) {
+export default function useHttp(requestFn, pendingInitially = false) {
   const [httpState, dispatch] = useReducer(httpReducer, {
-    status: null,
+    status: pendingInitially ? 'pending' : null,
     data: null,
     error: null,
   });
