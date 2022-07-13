@@ -3,7 +3,6 @@ const FIREBASE_DOMAIN =
 
 export async function getAllQuotes() {
   const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`);
-
   const data = await response.json();
 
   if (!response.ok) {
@@ -22,6 +21,20 @@ export async function getAllQuotes() {
   return transformedQuotes;
 }
 
+export async function getSingleQuote(id) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/quotes/${id}.json`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
+
+  return {
+    id,
+    ...data,
+  };
+}
+
 export async function addQuote(quoteData) {
   const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`, {
     method: 'POST',
@@ -36,4 +49,6 @@ export async function addQuote(quoteData) {
   if (!response.ok) {
     throw new Error(data.message);
   }
+
+  return null;
 }

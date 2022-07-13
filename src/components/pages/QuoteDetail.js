@@ -1,20 +1,35 @@
+import { useEffect } from 'react';
 import { Link, Route, useParams, useRouteMatch } from 'react-router-dom';
+import useHttp from '../../hooks/use-http';
+import { getSingleQuote } from '../../lib/api';
 import Comments from '../comments/Comments';
 import HighlightedQuote from '../quotes/HighlightedQuote';
+import LoadingSpinner from '../UI/LoadingSpinner';
 
-const DUMMY_QUOTES = [
-  { id: 'q1', author: 'Obi-Wan Kenobi', text: 'Hello there' },
-  { id: 'q2', author: 'Darth Maul', text: 'KENOBIIIIIIEEE' },
-];
-
-export default function QuoteDetail(props) {
-  const params = useParams();
+export default function QuoteDetail() {
+  const { quoteId } = useParams();
   const match = useRouteMatch();
 
-  const quote = DUMMY_QUOTES.find(quote => quote.id === params.quoteId);
+  const { sendRequest, status, data: quote, error } = useHttp(getSingleQuote);
 
-  if (!quote) {
-    return <p>No quote found</p>;
+  useEffect(() => {
+    sendRequest(quoteId);
+  }, [sendRequest, quoteId]);
+
+  if (status === 'pending') {
+    return (
+      <div className='centered'>
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p className='centered focused'>{error}</p>;
+  }
+
+  if (!quote.text || !quote.author) {
+    return <p className='centered focused'>No quote found</p>;
   }
 
   return (
