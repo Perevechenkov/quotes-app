@@ -1,0 +1,32 @@
+@use '../../abstracts/variables' as *;
+
+.spinner {
+     width: 80px;
+     height: 80px;
+
+     display: inline-block;
+
+     &::after {
+          width: 64px;
+          height: 64px;
+          margin: 8px;
+
+          border: 6px solid $bg-primary-dark-green;
+          border-color: $bg-primary-dark-green transparent $bg-primary-dark-green transparent;
+          border-radius: 50%;
+
+          content: ' ';
+          display: block;
+
+          animation: spinner 1.2s linear infinite;
+
+          @keyframes spinner {
+               0% {
+                    transform: rotate(0deg);
+               }
+               100% {
+                    transform: rotate(360deg);
+               }
+          }
+     }
+}

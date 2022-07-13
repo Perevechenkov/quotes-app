@@ -24,12 +24,14 @@ const addQuote = async quoteData => {
 
 export default function NewQuote(props) {
   const history = useHistory();
-  const { sendRequest, httpState } = useHttp(addQuote);
+  const { sendRequest, status } = useHttp(addQuote);
 
   const addQuoteHandler = quoteData => {
     sendRequest(quoteData);
     history.push('/quotes');
   };
 
-  return <QuoteForm onAddQuote={addQuoteHandler} />;
+  return (
+    <QuoteForm isLoading={status === 'pending'} onAddQuote={addQuoteHandler} />
+  );
 }

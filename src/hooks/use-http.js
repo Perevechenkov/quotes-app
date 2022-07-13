@@ -52,6 +52,6 @@ export default function useHttp(requestFn) {
 
   return {
     sendRequest,
-    httpState,
+    ...httpState,
   };
 }

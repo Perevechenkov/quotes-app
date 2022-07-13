@@ -1,6 +1,21 @@
 @use './../../abstracts/variables' as *;
 
 .form {
+     position: relative;
+
+     .loading {
+          position: absolute;
+
+          width: 100%;
+          height: 100%;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          background-color: $border-light;
+     }
+
      .control {
           margin-bottom: 0.5rem;
 
