@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import useHttp from '../../hooks/use-http';
 import { getAllQuotes } from '../../lib/api';
+import NoQuotesFound from '../quotes/NoQuotesFound';
 import QuoteList from '../quotes/QuoteLIst';
 import LoadingSpinner from '../UI/LoadingSpinner';
 
@@ -29,7 +30,7 @@ export default function AllQuotes(props) {
   }
 
   if (status === 'completed' && (!loadedQuotes || loadedQuotes.length === 0)) {
-    return <p className='centered focused'>No quotes found</p>;
+    return <NoQuotesFound />;
   }
 
   return <QuoteList quotes={loadedQuotes} />;
