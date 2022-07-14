@@ -18,7 +18,7 @@ export default function QuoteDetail() {
   } = useHttp(getSingleQuote, true);
 
   useEffect(() => {
-    sendRequest(quoteId);
+    sendRequest({ file: `/${quoteId}` });
   }, [sendRequest, quoteId]);
 
   if (status === 'pending') {

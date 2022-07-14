@@ -16,7 +16,7 @@ export default function NewQuote(props) {
   }, [status, history]);
 
   const addQuoteHandler = quoteData => {
-    sendRequest(quoteData);
+    sendRequest({ body: quoteData });
   };
 
   return (
