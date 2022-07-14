@@ -20,7 +20,7 @@ export default function AllQuotes(props) {
   if (status === 'pending') {
     return (
       <div className='centered'>
-        <LoadingSpinner />{' '}
+        <LoadingSpinner />
       </div>
     );
   }
