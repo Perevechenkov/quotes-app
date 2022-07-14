@@ -10,7 +10,12 @@ export default function QuoteDetail() {
   const { quoteId } = useParams();
   const match = useRouteMatch();
 
-  const { sendRequest, status, data: quote, error } = useHttp(getSingleQuote);
+  const {
+    sendRequest,
+    status,
+    data: quote,
+    error,
+  } = useHttp(getSingleQuote, true);
 
   useEffect(() => {
     sendRequest(quoteId);
