@@ -13,6 +13,9 @@ const factory = (
   } = {}
 ) => {
   return async ({ body = null, file = '', inputData = null } = {}) => {
+    if (file) {
+      file = '/' + file;
+    }
     const url = `${dbDomain}/${folder}${file}.json`;
 
     const response = await fetch(url, {
@@ -34,23 +37,29 @@ const factory = (
   };
 };
 
-const getTransformedQuotes = data => {
-  const transformedQuotes = [];
+const getTransformedData = data => {
+  const transformedData = [];
 
   for (const key in data) {
-    transformedQuotes.push({
+    transformedData.push({
       id: key,
       ...data[key],
     });
   }
 
-  return transformedQuotes;
+  return transformedData;
 };
 
-export const getAllQuotes = factory(getTransformedQuotes);
+export const getAllQuotes = factory(getTransformedData);
 
 export const getSingleQuote = factory((data, id) => {
   return { id, ...data };
 });
 
 export const addQuote = factory(null, { method: 'POST' });
+
+export const addComment = factory(null, { method: 'POST', folder: 'comments' });
+
+export const getAllComments = factory(getTransformedData, {
+  folder: 'comments',
+});
