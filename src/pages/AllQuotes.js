@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import useHttp from '../../hooks/use-http';
-import { getAllQuotes } from '../../lib/api';
-import NoQuotesFound from '../quotes/NoQuotesFound';
-import QuoteList from '../quotes/QuoteLIst';
-import LoadingSpinner from '../UI/LoadingSpinner';
+import useHttp from '../hooks/use-http';
+import { getAllQuotes } from '../lib/api';
+import NoQuotesFound from '../components/quotes/NoQuotesFound';
+import QuoteList from '../components/quotes/QuoteLIst';
+import LoadingSpinner from '../components/UI/LoadingSpinner';
 
 export default function AllQuotes(props) {
   const {
@@ -20,7 +20,7 @@ export default function AllQuotes(props) {
   if (status === 'pending') {
     return (
       <div className='centered'>
-        <LoadingSpinner />
+        <LoadingSpinner />{' '}
       </div>
     );
   }

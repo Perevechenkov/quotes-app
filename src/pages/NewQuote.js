@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import useHttp from '../../hooks/use-http';
-import { addQuote } from '../../lib/api';
+import useHttp from '../hooks/use-http';
+import { addQuote } from '../lib/api';
 
-import QuoteForm from '../quotes/QuoteForm';
+import QuoteForm from '../components/quotes/QuoteForm';
 
 export default function NewQuote(props) {
   const history = useHistory();

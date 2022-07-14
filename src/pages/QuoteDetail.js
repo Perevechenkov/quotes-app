@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { Link, Route, useParams, useRouteMatch } from 'react-router-dom';
-import useHttp from '../../hooks/use-http';
-import { getSingleQuote } from '../../lib/api';
-import Comments from '../comments/Comments';
-import HighlightedQuote from '../quotes/HighlightedQuote';
-import LoadingSpinner from '../UI/LoadingSpinner';
+import useHttp from '../hooks/use-http';
+import { getSingleQuote } from '../lib/api';
+import Comments from '../components/comments/Comments';
+import HighlightedQuote from '../components/quotes/HighlightedQuote';
+import LoadingSpinner from '../components/UI/LoadingSpinner';
 
 export default function QuoteDetail() {
   const { quoteId } = useParams();
