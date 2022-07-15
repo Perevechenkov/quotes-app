@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link, Route, useParams, Routes } from 'react-router-dom';
+import { Link, Route, useParams, Routes, Outlet } from 'react-router-dom';
 import useHttp from '../hooks/use-http';
 import { getSingleQuote } from '../lib/api';
 import Comments from '../components/comments/Comments';
@@ -42,13 +42,11 @@ export default function QuoteDetail() {
         {quote.text}
       </HighlightedQuote>
       <div className='centered'>
-        <Link className='btn--flat' to={'comments'}>
+        <Link className='btn--flat' to='comments'>
           Load Comments
         </Link>
       </div>
-      <Routes>
-        <Route path={'comments'} element={<Comments />} />
-      </Routes>
+      <Outlet />
     </>
   );
 }
