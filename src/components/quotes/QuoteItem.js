@@ -12,7 +12,7 @@ export default function QuoteItem({ quoteObj }) {
         </blockquote>
         <figcaption>{author}</figcaption>
       </figure>
-      <Link to={`/quotes/${id}`} className='btn'>
+      <Link to={id} className='btn'>
         View Fullscreen
       </Link>
     </li>
