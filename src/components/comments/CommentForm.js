@@ -1,12 +1,24 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { isNotEmpty } from '../../helpers/inputValidation';
 import useHttp from '../../hooks/use-http';
 import { addComment } from '../../lib/api';
+import Input from '../UI/Input';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './CommentForm.module.scss';
 
 export default function CommentForm({ quoteId, onAddedComment }) {
+  const authorRef = useRef();
   const commentRef = useRef();
+
   const { sendRequest, status, error } = useHttp(addComment);
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
+
+  let formIsValid = false;
+
+  if (authorRef?.current?.isValid() && commentRef?.current?.isValid()) {
+    formIsValid = true;
+  }
 
   useEffect(() => {
     if (status === 'completed' && !error) {
@@ -17,14 +29,18 @@ export default function CommentForm({ quoteId, onAddedComment }) {
   const submitFormHandler = event => {
     event.preventDefault();
 
-    const commentText = commentRef.current.value;
+    const author = authorRef.current;
+    const comment = commentRef.current;
 
-    if (commentText.trim().length === 0) {
+    if (!author.isValid() || !comment.isValid()) {
       return;
     }
 
+    author.reset();
+    comment.reset();
+
     sendRequest({
-      body: { text: commentText, quoteId: quoteId },
+      body: { author: author.value, text: comment.value, quoteId: quoteId },
       file: quoteId,
     });
   };
@@ -36,12 +52,27 @@ export default function CommentForm({ quoteId, onAddedComment }) {
           <LoadingSpinner />
         </div>
       )}
-      <div className={classes.control}>
-        <label htmlFor='comment'>Your Comment</label>
-        <textarea id='comment' rows='5' ref={commentRef}></textarea>
-      </div>
+      <Input
+        name='Your name'
+        type='text'
+        ref={authorRef}
+        validationFn={isNotEmpty}
+        validationErrMessage='Your name must not be empty'
+        upd={forceUpdate}
+      />
+      <Input
+        name='Your Comment'
+        type='text'
+        inputFieldTag='textarea'
+        ref={commentRef}
+        validationFn={isNotEmpty}
+        validationErrMessage='Your Comment must not be empty'
+        upd={forceUpdate}
+      />
       <div className={classes.actions}>
-        <button className='btn'>Add Comment</button>
+        <button disabled={!formIsValid} className='btn'>
+          Add Comment
+        </button>
       </div>
     </form>
   );

@@ -4,7 +4,8 @@
      margin-bottom: 0.5rem;
 
      &.invalid {
-          input {
+          input,
+          textarea {
                border: 1px solid $border-error;
 
                &:focus {

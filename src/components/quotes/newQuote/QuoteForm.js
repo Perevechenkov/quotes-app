@@ -3,9 +3,8 @@ import { useRef, useState, useCallback } from 'react';
 import Card from '../../UI/Card';
 import LoadingSpinner from '../../UI/LoadingSpinner';
 import classes from './QuoteForm.module.scss';
-import QuoteInput from '../../UI/Input';
-
-const isNotEmpty = value => value.trim().length !== 0;
+import Input from '../../UI/Input';
+import { isNotEmpty } from '../../../helpers/inputValidation';
 
 export default function QuoteForm(props) {
   const authorRef = useRef();
@@ -30,8 +29,6 @@ export default function QuoteForm(props) {
       return;
     }
 
-    console.log('added');
-
     props.onAddQuote({
       author: author.value,
       text: text.value,
@@ -47,7 +44,7 @@ export default function QuoteForm(props) {
               <LoadingSpinner />
             </div>
           )}
-          <QuoteInput
+          <Input
             name='Author'
             type='text'
             ref={authorRef}
@@ -55,7 +52,7 @@ export default function QuoteForm(props) {
             validationErrMessage='Author must not be empty'
             upd={forceUpdate}
           />
-          <QuoteInput
+          <Input
             name='Text'
             type='text'
             ref={textRef}

@@ -3,8 +3,14 @@ import useInput from '../../hooks/use-input';
 import classes from './Input.module.scss';
 
 export default forwardRef(function QuoteInput(props, ref) {
-  const { validationFn, validationErrMessage, name, type, inputFieldTag, upd } =
-    props;
+  let {
+    validationFn,
+    validationErrMessage = '',
+    name,
+    type,
+    inputFieldTag,
+    upd,
+  } = props;
 
   const id = useId();
 
@@ -13,10 +19,19 @@ export default forwardRef(function QuoteInput(props, ref) {
     isValid() {
       return isValid;
     },
+    reset() {
+      reset();
+    },
   }));
 
-  const { value, isValid, hasError, valueChangeHandler, inputBlurHandler } =
-    useInput(validationFn);
+  const {
+    value,
+    isValid,
+    hasError,
+    valueChangeHandler,
+    inputBlurHandler,
+    reset,
+  } = useInput(validationFn);
 
   useEffect(() => {
     upd();
@@ -47,6 +62,10 @@ export default forwardRef(function QuoteInput(props, ref) {
         onBlur={inputBlurHandler}
       ></textarea>
     );
+  }
+
+  if (!validationErrMessage) {
+    validationErrMessage = `${name} must not be empty`;
   }
 
   return (
