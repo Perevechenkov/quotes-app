@@ -1,14 +1,14 @@
-@use './../../../abstracts/variables' as *;
+@use './../../abstracts/variables' as *;
 
 .control {
      margin-bottom: 0.5rem;
 
      &.invalid {
           input {
-               border: 1px solid red;
+               border: 1px solid $border-error;
 
                &:focus {
-                    border-color: red;
+                    border-color: $border-error;
                }
           }
      }
@@ -43,6 +43,6 @@
      }
 
      .error-text {
-          color: red;
+          color: $text-error;
      }
 }

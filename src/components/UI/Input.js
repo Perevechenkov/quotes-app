@@ -1,9 +1,10 @@
 import { forwardRef, useEffect, useId, useImperativeHandle } from 'react';
-import useInput from '../../../hooks/use-input';
-import classes from './QuoteInput.module.scss';
+import useInput from '../../hooks/use-input';
+import classes from './Input.module.scss';
 
 export default forwardRef(function QuoteInput(props, ref) {
-  const { validationFn, validationErrMessage, name, type, upd } = props;
+  const { validationFn, validationErrMessage, name, type, inputFieldTag, upd } =
+    props;
 
   const id = useId();
 
@@ -25,16 +26,33 @@ export default forwardRef(function QuoteInput(props, ref) {
     ? `${classes.control} ${classes.invalid}`
     : classes.control;
 
-  return (
-    <div className={inputClasses}>
-      <label htmlFor={id}>{name}</label>
-      <input
+  let inputField = (
+    <input
+      type={type}
+      id={id}
+      value={value}
+      onChange={valueChangeHandler}
+      onBlur={inputBlurHandler}
+    ></input>
+  );
+
+  if (inputFieldTag === 'textarea') {
+    inputField = (
+      <textarea
         type={type}
         id={id}
         value={value}
+        rows={5}
         onChange={valueChangeHandler}
         onBlur={inputBlurHandler}
-      ></input>
+      ></textarea>
+    );
+  }
+
+  return (
+    <div className={inputClasses}>
+      <label htmlFor={id}>{name}</label>
+      {inputField}
       {hasError && (
         <p className={classes['error-text']}>{validationErrMessage}</p>
       )}

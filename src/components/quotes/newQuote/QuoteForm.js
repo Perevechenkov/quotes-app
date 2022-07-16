@@ -3,7 +3,7 @@ import { useRef, useState, useCallback } from 'react';
 import Card from '../../UI/Card';
 import LoadingSpinner from '../../UI/LoadingSpinner';
 import classes from './QuoteForm.module.scss';
-import QuoteInput from './QuoteInput';
+import QuoteInput from '../../UI/Input';
 
 const isNotEmpty = value => value.trim().length !== 0;
 
