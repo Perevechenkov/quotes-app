@@ -1,0 +1,48 @@
+@use './../../../abstracts/variables' as *;
+
+.control {
+     margin-bottom: 0.5rem;
+
+     &.invalid {
+          input {
+               border: 1px solid red;
+
+               &:focus {
+                    border-color: red;
+               }
+          }
+     }
+
+     label {
+          margin-bottom: 0.5rem;
+
+          display: block;
+
+          font-weight: bold;
+
+          user-select: none;
+     }
+
+     input,
+     textarea {
+          width: 100%;
+          padding: 0.35rem;
+
+          border: 1px solid $border-light-opace;
+          border-radius: 4px;
+
+          background-color: $bg-primary-light;
+          font: inherit;
+          color: $text-color;
+
+          &:focus {
+               border-color: $border-light;
+
+               outline: none;
+          }
+     }
+
+     .error-text {
+          color: red;
+     }
+}

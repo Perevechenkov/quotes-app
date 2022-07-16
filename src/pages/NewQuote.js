@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useHttp from '../hooks/use-http';
 import { addQuote } from '../lib/api';
 
-import QuoteForm from '../components/quotes/QuoteForm';
+import QuoteForm from '../components/quotes/newQuote/QuoteForm';
 
 export default function NewQuote(props) {
   const navigate = useNavigate();
