@@ -40,7 +40,12 @@ export default function CommentForm({ quoteId, onAddedComment }) {
     comment.reset();
 
     sendRequest({
-      body: { author: author.value, text: comment.value, quoteId: quoteId },
+      body: {
+        author: author.value,
+        text: comment.value,
+        quoteId: quoteId,
+        date: new Date(),
+      },
       file: quoteId,
     });
   };
