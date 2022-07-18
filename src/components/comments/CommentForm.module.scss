@@ -3,35 +3,11 @@
 .form {
      margin-top: 1rem;
 
-     .control {
-          margin-bottom: 0.5rem;
-
-          label {
-               display: block;
-               user-select: none;
-          }
-
-          textarea {
-               width: 100%;
-               padding: 0.35rem;
-
-               border: 1px solid $border-light-opace;
-               border-radius: 5px;
-
-               background-color: transparent;
-               outline: none;
-               font: inherit;
-               font-size: 1.25rem;
-               color: $text-blue-color;
-
-               &:focus {
-                    border-color: $border-light;
-               }
-          }
-     }
-
      .actions {
+          text-align: right;
+
           button {
+               margin-right: 1rem;
                font-size: 1.25rem;
           }
      }
