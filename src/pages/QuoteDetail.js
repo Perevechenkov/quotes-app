@@ -1,13 +1,15 @@
-import { useEffect } from 'react';
-import { Link, Route, useParams, Routes, Outlet } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useParams, Outlet, useNavigate } from 'react-router-dom';
 import useHttp from '../hooks/use-http';
 import { getSingleQuote } from '../lib/api';
-import Comments from '../components/comments/Comments';
 import HighlightedQuote from '../components/quotes/HighlightedQuote';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 
 export default function QuoteDetail() {
   const { quoteId } = useParams();
+  const navigate = useNavigate();
+
+  const [displayingComments, setDisplayingComments] = useState(false);
 
   const {
     sendRequest,
@@ -19,6 +21,10 @@ export default function QuoteDetail() {
   useEffect(() => {
     sendRequest({ file: quoteId });
   }, [sendRequest, quoteId]);
+
+  const toggleDisplayComments = () => {
+    setDisplayingComments(prev => !prev);
+  };
 
   if (status === 'pending') {
     return (
@@ -36,16 +42,32 @@ export default function QuoteDetail() {
     return <p className='centered focused'>No quote found</p>;
   }
 
+  let commentsControl = (
+    <Link className='btn--flat' to='comments' onClick={toggleDisplayComments}>
+      Load Comments
+    </Link>
+  );
+
+  if (displayingComments) {
+    commentsControl = (
+      <div
+        className='btn--flat'
+        onClick={() => {
+          toggleDisplayComments();
+          navigate(-1);
+        }}
+      >
+        Hide comments
+      </div>
+    );
+  }
+
   return (
     <>
       <HighlightedQuote text={quote.text} author={quote.author}>
         {quote.text}
       </HighlightedQuote>
-      <div className='centered'>
-        <Link className='btn--flat' to='comments'>
-          Load Comments
-        </Link>
-      </div>
+      <div className='centered'>{commentsControl}</div>
       <Outlet />
     </>
   );

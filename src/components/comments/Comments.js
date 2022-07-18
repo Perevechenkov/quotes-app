@@ -26,6 +26,7 @@ export default function Comments(props) {
   };
 
   const addCommentHandler = useCallback(() => {
+    toggleAddingCommentHandler();
     sendRequest({ file: quoteId });
   }, [sendRequest, quoteId]);
 
