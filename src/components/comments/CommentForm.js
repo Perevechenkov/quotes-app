@@ -79,10 +79,14 @@ export default function CommentForm({
         upd={forceUpdate}
       />
       <div className={classes.actions}>
-        <button className='btn' onClick={onToggleAddingCommentHandler}>
+        <button
+          type='button'
+          className='btn'
+          onClick={onToggleAddingCommentHandler}
+        >
           Close form
         </button>
-        <button disabled={!formIsValid} className='btn'>
+        <button type='submit' disabled={!formIsValid} className='btn'>
           Add Comment
         </button>
       </div>
