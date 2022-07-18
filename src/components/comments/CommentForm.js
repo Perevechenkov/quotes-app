@@ -6,7 +6,11 @@ import Input from '../UI/Input';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './CommentForm.module.scss';
 
-export default function CommentForm({ quoteId, onAddedComment }) {
+export default function CommentForm({
+  quoteId,
+  onAddedComment,
+  onToggleAddingCommentHandler,
+}) {
   const authorRef = useRef();
   const commentRef = useRef();
 
@@ -75,6 +79,9 @@ export default function CommentForm({ quoteId, onAddedComment }) {
         upd={forceUpdate}
       />
       <div className={classes.actions}>
+        <button className='btn' onClick={onToggleAddingCommentHandler}>
+          Close form
+        </button>
         <button disabled={!formIsValid} className='btn'>
           Add Comment
         </button>

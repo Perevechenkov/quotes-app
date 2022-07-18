@@ -21,8 +21,8 @@ export default function Comments(props) {
     sendRequest({ file: quoteId });
   }, [sendRequest, quoteId]);
 
-  const startAddingCommentHandler = () => {
-    setIsAddingComment(true);
+  const toggleAddingCommentHandler = () => {
+    setIsAddingComment(prev => !prev);
   };
 
   const addCommentHandler = useCallback(() => {
@@ -49,12 +49,16 @@ export default function Comments(props) {
     <section className={classes.comments}>
       <h2>User Comments</h2>
       {!isAddingComment && (
-        <button className='btn' onClick={startAddingCommentHandler}>
+        <button className='btn' onClick={toggleAddingCommentHandler}>
           Add a Comment
         </button>
       )}
       {isAddingComment && (
-        <CommentForm quoteId={quoteId} onAddedComment={addCommentHandler} />
+        <CommentForm
+          quoteId={quoteId}
+          onToggleAddingCommentHandler={toggleAddingCommentHandler}
+          onAddedComment={addCommentHandler}
+        />
       )}
       {comments}
     </section>
