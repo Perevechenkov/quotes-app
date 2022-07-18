@@ -21,11 +21,7 @@ function App() {
         }
       >
         <Routes>
-          <Route
-            path='/'
-            exact
-            render={() => <Navigate replace to='/quotes' />}
-          />
+          <Route path='/' element={<Navigate to='quotes' replace />} />
           <Route path='/quotes' element={<AllQuotes />} />
           <Route path='/quotes/:quoteId/*' element={<QuoteDetail />}>
             <Route path='comments' element={<Comments />} />
